@@ -16,13 +16,22 @@ import {
   TicketEvent,
 } from "@/lib/ticketStorage";
 
-type EventTextField = "email" | "orderNumber" | "eventName" | "dateTime" | "venue";
+type EventTextField =
+  | "accountName"
+  | "email"
+  | "orderNumber"
+  | "eventName"
+  | "dateTime"
+  | "orderDateTime"
+  | "venue";
 
 const eventFields: { name: EventTextField; label: string; type?: string }[] = [
+  { name: "accountName", label: "Account name" },
   { name: "email", label: "Email", type: "email" },
   { name: "orderNumber", label: "Order No." },
   { name: "eventName", label: "Event Name" },
   { name: "dateTime", label: "Date and time" },
+  { name: "orderDateTime", label: "Order date and time" },
   { name: "venue", label: "Location" },
 ];
 

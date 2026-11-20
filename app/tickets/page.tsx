@@ -81,9 +81,13 @@ export default function MyTicketsPage() {
           ))}
         </div>
 
-        <p className="mb-6 rounded-lg bg-amber-50 p-4 text-sm leading-relaxed text-amber-900">
-          Demo ticket details only. Records saved here are not verified or valid
-          for venue entry.
+        <p className="mb-5 rounded-lg bg-amber-50 p-4 text-sm text-amber-900">
+          Find your purchase and tickets received via ticket transfer here.
+          <br />
+          Ticket transfer allows you to transfer some or all of your tickets
+          from tour Ticketmaster account to another. Not all orders are eligible
+          for ticket transfers. A Transfer button will be displayed when
+          transfer is available.
         </p>
 
         {activeTab === "received" ? (
@@ -99,24 +103,31 @@ export default function MyTicketsPage() {
 
             <div className="space-y-5 p-5">
               <div>
+                <p className="mb-1 text-xs text-gray-500">Order Date</p>
+                <p className="text-sm font-medium text-black">
+                  {event.orderDateTime}
+                </p>
+              </div>
+
+              <div>
                 <p className="mb-1 text-xs text-gray-500">
                   Purchase information
                 </p>
                 <p className="font-semibold text-gray-900">{event.eventName}</p>
-                <div className="mt-2 flex flex-wrap items-center gap-4 text-sm text-gray-600">
+                <div className="mt-2 flex flex-col items-start gap-4 text-sm text-gray-600">
                   <span className="flex items-center gap-1">
-                    <CreditCard className="h-4 w-4" /> Ticket record
+                    <CreditCard className="h-4 w-4" /> Credit Card
                   </span>
                   <span className="flex items-center gap-1">
-                    <Printer className="h-4 w-4" /> Digital
+                    <Printer className="h-4 w-4" /> Print-at-Home
                   </span>
                 </div>
               </div>
 
               <div>
-                <p className="mb-1 text-xs text-gray-500">Status</p>
-                <p className="text-sm font-medium text-green-700">
-                  Demo details saved
+                <p className="mb-1 text-xs text-gray-500">Order Status</p>
+                <p className="text-sm font-medium text-black">
+                  E-ticket available
                 </p>
               </div>
 
@@ -136,30 +147,24 @@ export default function MyTicketsPage() {
 
               {showDetails && (
                 <div className="space-y-6 border-t pt-5">
-                  <div>
-                    <p className="font-semibold text-gray-900">
-                      {event.eventName}
-                    </p>
-                    <div className="mt-2 space-y-1 text-sm text-gray-600">
-                      <p className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4" />
-                        {event.dateTime}
-                      </p>
-                      <p className="flex items-center gap-2">
-                        <MapPin className="h-4 w-4" />
-                        {event.venue}
-                      </p>
-                    </div>
-                  </div>
-
-                  {event.tickets.map((ticket, index) => (
+                  {event.tickets.map((ticket) => (
                     <div
                       key={ticket.id}
-                      className="space-y-3 border-t pt-5 text-sm"
+                      className="space-y-3 rounded-lg border border-gray-200 p-4 text-sm"
                     >
                       <p className="font-semibold text-gray-900">
-                        Ticket {index + 1}
+                        {event.eventName}
                       </p>
+                      <div className="space-y-1 text-gray-600">
+                        <p className="flex items-center gap-2">
+                          <Calendar className="h-4 w-4" />
+                          {event.dateTime}
+                        </p>
+                        <p className="flex items-center gap-2">
+                          <MapPin className="h-4 w-4" />
+                          {event.venue}
+                        </p>
+                      </div>
                       <div>
                         <p className="text-xs text-gray-500">Seat info</p>
                         <p className="font-medium">{ticket.section}</p>
@@ -189,17 +194,22 @@ export default function MyTicketsPage() {
                           </span>
                         </p>
                       </div>
+                      <div className="flex items-center justify-center mt-6">
+                        <div className="bg-[#023fd6] w-30 flex items-center justify-center gap-2 rounded px-4 py-2 text-sm font-medium text-white">
+                          Print-at-Home
+                        </div>
+                      </div>
                     </div>
                   ))}
 
                   <div className="space-y-3 border-t pt-5">
-                    <div className="flex justify-between text-sm">
+                    <div className="flex flex-col justify-center items-center gap-2 text-sm">
                       <span className="text-gray-600">Ticket Qty.</span>
                       <span className="font-medium">
                         {event.tickets.length} ticket(s)
                       </span>
                     </div>
-                    <div className="flex justify-between text-base font-semibold">
+                    <div className="flex flex-col justify-center items-center gap-2 text-base font-semibold">
                       <span>Total</span>
                       <span className="text-red-700">
                         {formatPrice(getEventTotal(event))}
@@ -207,7 +217,7 @@ export default function MyTicketsPage() {
                     </div>
                     <Link
                       href="/ticket-view"
-                      className="inline-flex rounded-md bg-[#0055A5] px-4 py-2 text-sm font-medium text-white hover:bg-blue-800"
+                      className="inline-flex rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white hover:bg-blue-800"
                     >
                       View ticket details
                     </Link>

@@ -4,9 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { LogOut, CircleUserRound, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { DEFAULT_TICKET_EVENT, loadTicketEvent } from "@/lib/ticketStorage";
 
 export default function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
+  const [accountName, setAccountName] = useState(
+    DEFAULT_TICKET_EVENT.accountName,
+  );
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -21,6 +25,15 @@ export default function SiteHeader() {
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setAccountName(
+        loadTicketEvent()?.accountName ?? DEFAULT_TICKET_EVENT.accountName,
+      );
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   return (
@@ -68,7 +81,7 @@ export default function SiteHeader() {
               <div className="absolute right-0 top-12 z-50 w-56 rounded-md bg-white text-gray-700 shadow-xl ring-1 ring-black/5">
                 <div className="border-b border-gray-100 px-4 py-3">
                   <p className="text-sm font-semibold text-gray-900">
-                    My account
+                    {accountName}
                   </p>
                 </div>
                 <nav aria-label="Account" className="py-1">

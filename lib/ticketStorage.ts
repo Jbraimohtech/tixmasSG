@@ -10,9 +10,11 @@ export interface TicketDetails {
 }
 
 export interface TicketEvent {
+  accountName: string;
   email: string;
   eventName: string;
   dateTime: string;
+  orderDateTime: string;
   venue: string;
   orderNumber: string;
   heroImage: string;
@@ -21,9 +23,11 @@ export interface TicketEvent {
 }
 
 export const DEFAULT_TICKET_EVENT: TicketEvent = {
+  accountName: "My account",
   email: "yirulim029@gmail.com",
   eventName: "EXO PLANET #6 - EXO Horizon in SINGAPORE",
   dateTime: "26 Jul 2026 (Sun.) 06:00 pm",
+  orderDateTime: "21-04-2026 12:04am",
   venue: "Singapore Indoor Stadium",
   orderNumber: "18492255",
   heroImage: "",
@@ -116,9 +120,11 @@ export function loadTicketEvent(): TicketEvent | null {
   });
 
   return {
+    accountName: textOr(parsed.accountName, DEFAULT_TICKET_EVENT.accountName),
     email: textOr(parsed.email, DEFAULT_TICKET_EVENT.email),
     eventName: textOr(parsed.eventName, DEFAULT_TICKET_EVENT.eventName),
     dateTime: textOr(parsed.dateTime, DEFAULT_TICKET_EVENT.dateTime),
+    orderDateTime: textOr(parsed.orderDateTime, DEFAULT_TICKET_EVENT.orderDateTime),
     venue: textOr(parsed.venue, DEFAULT_TICKET_EVENT.venue),
     orderNumber: textOr(parsed.orderNumber, DEFAULT_TICKET_EVENT.orderNumber),
     heroImage: textOr(parsed.heroImage, ""),

@@ -49,8 +49,12 @@ export default function TicketView() {
         </Link>
 
         <p className="mb-5 rounded-lg bg-amber-50 p-4 text-sm text-amber-900">
-          Demo ticket details only. This record is not verified or valid for
-          venue entry.
+          Find your purchase and tickets received via ticket transfer here.
+          <br />
+          Ticket transfer allows you to transfer some or all of your tickets
+          from tour Ticketmaster account to another. Not all orders are eligible
+          for ticket transfers. A Transfer button will be displayed when
+          transfer is available.
         </p>
 
         <article className="overflow-hidden rounded-xl border border-gray-200 shadow-sm">

@@ -4,8 +4,11 @@ export default function SiteFooter() {
   return (
     <footer className="mt-12 bg-black text-white">
       <div className="mx-auto max-w-3xl px-6 py-10">
-        <Link href="/" className="mb-8 inline-block text-2xl font-bold tracking-tight">
-          Event <span className="font-light">Tickets</span>
+        <Link
+          href="/"
+          className="italic mb-8 inline-block text-2xl font-bold tracking-tight"
+        >
+          Ticketmaster
         </Link>
 
         <div className="mb-6">
@@ -26,12 +29,9 @@ export default function SiteFooter() {
         </p>
 
         <div className="space-y-0 border-t border-gray-800">
-          {["Categories", "Customer Care", "Be Part Of It", "About Us"].map(
+          {["Categories", "Customer Care", "Be Part Of It", "Corporate"].map(
             (item) => (
-              <div
-                key={item}
-                className="border-b border-gray-800 py-4 text-sm"
-              >
+              <div key={item} className="border-b border-gray-800 py-4 text-sm">
                 {item}
               </div>
             ),
